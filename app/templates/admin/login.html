@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星空电影管理系统-后台管理</title>
+    <!--解决IE浏览器的兼容性问题-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--设置页面的参数值-->
+    <!--width=device-width 页面的可视化区域-->
+    <!--initial-scale-1:显示可视化去缩放级别  1.0-->
+    <!--maximum-scale=?最大缩放值-->
+    <!--minimum-scale=?最小缩放值-->
+    <!--user-scalable=yes/no 表示用户可以手动缩放-->
+    <!--name='viewport' 手机端页面虚拟窗口-->
+    <meta content="width=device-width,initial-scale-1,user-scalable=no"
+          name="viewport">
+
+    <link rel="shortct icon"
+            href="{{ url_for('static',
+            filename='base/images/logo.png') }}">
+    <link rel="stylesheet"
+            href="{{ url_for('static',
+            filename='fonts/css/font-awesome.min.css') }}">
+    <link rel="stylesheet"
+            href="{{ url_for('static',
+            filename='ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet"
+            href="{{ url_for('static',
+            filename='admin/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet"
+            href="{{ url_for('static',
+            filename='admin/plugins/iCheck/square/blue.css')}}">
+    <link rel="stylesheet"
+            href="{{ url_for('static',
+            filename='admin/bootstrap/css/bootstrap.min.css') }}">
+    <!--设置页面的总样式-->
+    <style>
+        *{
+           font-family: 'Microsoft YaHei','Sans-Serif';
+        }
+        .table>tbody>tr>td,.table>tbody>tr>th,
+        .table>tfoot>tr>td,.table>tfoot>tr>th,
+        .table>thead>tr>td,.table>thead>tr>th{
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+    {% block css %}
+        <!--其他页面的CSS样式编写区域 嵌入到这里-->
+    {% endblock %}
+
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <b>星空电影管理系统</b>
+        </div>
+        <div class="login-box-body">
+            <!--1.设置登录信息显示-->
+            <!--失败-->
+            {% for msg in get_flashed_messages(category_filter=['err'])%}
+                <p class="login-box-msg" style="color: red">{{ msg }}</p>
+            {% endfor %}
+            <!--成功-->
+            {% for msg in get_flashed_messages(category_filter=['ok'])%}
+                <p class="login-box-msg" style="color: green">{{ msg }}</p>
+            {% endfor %}
+            <!--2.设置表单提交-->
+            <form method="post" id="form-data">
+                <!--2.1 账户-->
+                <div class="form-group has-feedback"
+                                style="height: 30px">
+                    {{ form.account }}
+                    <span class="glyphicon
+                            glyphicon-envelope
+                            form-control-feedback">
+                    </span>
+                    {% for err in form.account.errors %}
+                        <div class="col-md-12">
+                            <p style="color: red">{{ err }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!--密码-->
+                <div class="form-group has-feedback"
+                                style="height: 30px">
+                    {{ form.pwd }}
+                    <span class="glyphicon
+                            glyphicon-envelope
+                            form-control-feedback">
+                    </span>
+                    {% for err in form.pwd.errors %}
+                        <div class="col-md-12">
+                            <p style="color: red">{{ err }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!--2.3 登录按钮-->
+                <div class="row">
+                    <div class="col-xs-8"></div>
+                    <div class="col-xs-4">
+                        <!--令牌,保护验证的-->
+                        {{ form.csrf_token }}
+                        {{ form.submit }}
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <!--3.加载js文件-->
+    <script src="{{ url_for('static',
+        filename='admin/plugins/jQuery/jQuery-2.2.0.min.js')}}">
+    </script>
+    <script src="{{ url_for('static',
+        filename='admin/bootstrap/js/bootstrap.min.js')}}">
+    </script>
+    <script src="{{ url_for('static',
+        filename='admin/plugins/iCheck/icheck.min.js')}}">
+    </script>
+</body>
+</html>

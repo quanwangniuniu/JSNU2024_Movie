@@ -1,0 +1,101 @@
+<!--1.继承admin.html-->
+{% extends 'admin/admin.html' %}
+<!--2.设置主内容-->
+{% block content %}
+    <!--显示位置-->
+    <section class="content-header">
+        <h1>星空电影管理系统|后台</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    权限添加
+                </a>
+            </li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box  box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            添加权限
+                        </h3>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="box-body">
+                            <!--成功弹出框-->
+                            {% for msg in get_flashed_messages(category_filter=['ok']) %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close"
+                                            data-toggle="alert" aria-hidden="true">
+                                    </button>
+                                    <h4>
+                                        <i class="icon fa  fa-check"></i>操作成功
+                                    </h4>
+                                    {{ msg }}
+                                </div>
+                            {% endfor %}
+                            <!--失败弹出框-->
+                            {% for msg in get_flashed_messages(category_filter=['err']) %}
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close"
+                                            data-toggle="alert" aria-hidden="true">
+                                    </button>
+                                    <h4>
+                                        <i class="icon fa  fa-ban"></i>操作失败
+                                    </h4>
+                                    {{ msg }}
+                                </div>
+
+                            {% endfor %}
+                            <!--1.权限名称-->
+                            <div class="form-group">
+                                <label for="input_name">
+                                    {{ form.name.label }}
+                                </label>
+                                {{ form.name }}
+                                {% for err in form.name.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--2.权限url-->
+                            <div class="form-group">
+                                <label for="input_url">
+                                    {{ form.url.label }}
+                                </label>
+                                {{ form.url }}
+                                {% for err in form.url.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            {{ form.csrf_token }}
+                            {{ form.submit }}
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!--3.js区域-->
+{% block js %}
+    <script>
+        $(document).ready(function (){
+           $('#g-2').addClass("active");
+           $('#g-2-1').addClass("active");
+        });
+    </script>
+{% endblock %}
+

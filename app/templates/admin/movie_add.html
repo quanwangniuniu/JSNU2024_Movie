@@ -1,0 +1,209 @@
+<!--1.继承admin.html-->
+{% extends 'admin/admin.html' %}
+<!--2.设置主内容-->
+{% block content %}
+    <!--显示位置-->
+    <section class="content-header">
+        <h1>星空电影管理系统|后台</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    电影添加
+                </a>
+            </li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box  box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            添加电影
+                        </h3>
+                    </div>
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <!--成功弹出框-->
+                            {% for msg in get_flashed_messages(category_filter=['ok']) %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close"
+                                            data-toggle="alert" aria-hidden="true">
+                                    </button>
+                                    <h4>
+                                        <i class="icon fa  fa-check"></i>操作成功
+                                    </h4>
+                                    {{ msg }}
+                                </div>
+                            {% endfor %}
+                            <!--失败弹出框-->
+                            {% for msg in get_flashed_messages(category_filter=['err']) %}
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close"
+                                            data-toggle="alert" aria-hidden="true">
+                                    </button>
+                                    <h4>
+                                        <i class="icon fa  fa-ban"></i>操作失败
+                                    </h4>
+                                    {{ msg }}
+                                </div>
+
+                            {% endfor %}
+                            <!--电影设置-->
+                            <!--1.电影标题-->
+                            <div class="form-group">
+                                <label for="input_title">
+                                    {{ form.title.label }}
+                                </label>
+                                {{ form.title }}
+                                {% for err in form.title.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--2.电影上传-->
+                            <div class="form-group">
+                                <label for="input_url">
+                                    {{ form.url.label }}
+                                </label>
+                                {{ form.url }}
+                                {% for err in form.url.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                                <div style="margin-top: 5px">
+                                    <div id="moviecontainer"></div>
+                                </div>
+                            </div>
+
+                            <!--3.电影简介-->
+                            <div class="form-group">
+                                <label for="input_info">
+                                    {{ form.info.label }}
+                                </label>
+                                {{ form.info }}
+                                {% for err in form.info.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--4.电影海报-->
+                            <div class="form-group">
+                                <label for="input_logo">
+                                    {{ form.logo.label }}
+                                </label>
+                                {{ form.logo }}
+                                {% for err in form.logo.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                                <img data-src="holder.js/262*166"
+                                    style="margin-top: 5px"
+                                    class="img-responsive" alt="">
+                            </div>
+
+                            <!--5.电影星级-->
+                            <div class="form-group">
+                                <label for="input_star">
+                                    {{ form.star.label }}
+                                </label>
+                                {{ form.star }}
+                                {% for err in form.star.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--6.电影标签-->
+                            <div class="form-group">
+                                <label for="input_tag_id">
+                                    {{ form.tag_id.label }}
+                                </label>
+                                {{ form.tag_id }}
+                                {% for err in form.tag_id.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--7.上映地区-->
+                            <div class="form-group">
+                                <label for="input_area">
+                                    {{ form.area.label }}
+                                </label>
+                                {{ form.area }}
+                                {% for err in form.area.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--8.电影时长-->
+                            <div class="form-group">
+                                <label for="input_length">
+                                    {{ form.length.label }}
+                                </label>
+                                {{ form.length }}
+                                {% for err in form.length.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!--9.上映时间-->
+                            <div class="form-group">
+                                <label for="input_release_time">
+                                    {{ form.release_time.label }}
+                                </label>
+                                {{ form.release_time }}
+                                {% for err in form.release_time.errors %}
+                                    <div class="col-md-12">
+                                        <p style="color: red">{{ err }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="box-footer">
+                            {{ form.csrf_token }}
+                            {{ form.submit }}
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!--3.js区域-->
+{% block js %}
+    <script>
+        $(document).ready(function (){
+            $("#input_release_time").datepicker({
+               autoclose:true,
+               format:'yyyy-mm-dd',
+               language:'zh-CN'
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function (){
+           $('#g-3').addClass("active");
+           $('#g-3-1').addClass("active");
+        });
+    </script>
+{% endblock %}
+

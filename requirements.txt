@@ -1,0 +1,8 @@
+flask==2.0.2
+flask-script==2.0.5
+flask-sqlalchemy==2.5.1
+flask-redis==0.4.0
+flask-wtf==1.0.0
+mysql-connector==2.2.9  或 mysql-connector-python
+sqlalchemy==1.4.32
+werkzeug==2.0.3

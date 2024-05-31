@@ -1,0 +1,112 @@
+<!--1.继承admin.html-->
+{% extends 'admin/admin.html' %}
+
+{% block css %}
+    <style>
+        * {font-family: "Microsoft YaHei"}
+        .table>tbody>tr>td{
+            vertical-align: middle;
+            text-align: left;
+        }
+        .td_hd{
+            width: 100px;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+<!--2.设置主内容-->
+{% block content %}
+    <!--显示位置-->
+    <section class="content-header">
+        <h1>星空电影管理系统|后台</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    会员详情
+                </a>
+            </li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box  box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                             会员详情
+                        </h3>
+                    </div>
+                    <!--修改内容如下-->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td class="td_hd">编号:</td>
+                                    <td>{{ user.id }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="td_hd">昵称:</td>
+                                    <td>{{ user.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="td_hd">邮箱:</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                            <tr>
+                                    <td class="td_hd">手机:</td>
+                                    <td>{{ user.phone }}</td>
+                                </tr>
+                            <tr>
+                                    <td class="td_hd">头像:</td>
+                                    <td>
+                                        {% if user.face %}
+                                            <img alt="50*50"
+                                                src="{{ url_for('static',
+                                                    filename='uploads/users/'+user.face) }}"
+                                                class="img-circle"
+                                                style="border: 1px solid #adcdef;width: 50px">
+                                        {% else %}
+                                            <img alt="50*50"
+                                                data-src="holder.js/60*50"
+                                                class="img-circle"
+                                                style="border: 1px solid #adcdef;width: 50px">
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+                            <tr>
+                                    <td class="td_hd">注册时间:</td>
+                                    <td>{{ user.addtime }}</td>
+                                </tr>
+                            <tr>
+                                    <td class="td_hd">唯一标识:</td>
+                                    <td>{{ user.uuid }}</td>
+                                </tr>
+                            <tr>
+                                    <td class="td_hd">自我介绍:</td>
+                                    <td>{{ user.info }}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!--3.js区域-->
+{% block js %}
+    <script>
+        $(document).ready(function (){
+           $('#g-5').addClass("active");
+           $('#g-5-1').addClass("active");
+        });
+    </script>
+{% endblock %}
+
